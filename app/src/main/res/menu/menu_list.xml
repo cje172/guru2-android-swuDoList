@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/shortcut"
+        android:title="바로가기">
+        <menu>
+            <item
+                android:id="@+id/url_main"
+                android:title="학교 홈페이지" />
+            <item
+                android:id="@+id/url_lib"
+                android:title="도서관" />
+            <item
+                android:id="@+id/url_info"
+                android:title="종합정보시스템" />
+            <item
+                android:id="@+id/url_eport"
+                android:title="학생성장지원시스템" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_theme"
+        android:title="테마 변경" />
+    <item
+        android:id="@+id/action_category"
+        android:title="카테고리 관리" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="로그아웃" />
+</menu>

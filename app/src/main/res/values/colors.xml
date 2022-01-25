@@ -7,21 +7,5 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <!-- 색상 추가 -->
-    <color name="burgundy_500">#9E1A20</color>
-    <color name="burgundy_700">#751318</color>
-
-    <color name="blue_500">#101077</color>
-    <color name="blue_700">#0C0C5A</color>
-
-    <color name="yellow_500">#FFB300</color>
-    <color name="yellow_700">#D39401</color>
-
-    <color name="green_500">#205723</color>
-    <color name="green_700">#1A451C</color>
-
-    <color name="black_500">#2B2B2B</color>
-    <color name="black_700">#000000</color>
-
+    <color name="red">#9E1A20</color>
 </resources>

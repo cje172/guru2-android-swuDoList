@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/drawer_menu"
+    android:layout_width="340dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:background="#A53235"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ooo님"
+            android:textSize="40dp"
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"/>
+        <TextView
+            android:id="@+id/student_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="학번 : 1111111111"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"
+            android:paddingBottom="20dp"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:menu="@menu/menu_list" />
+
+</LinearLayout>
