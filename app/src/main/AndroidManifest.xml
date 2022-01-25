@@ -12,8 +12,9 @@
         <activity
             android:name=".register"
             android:parentActivityName=".Login"/>
-
         <activity android:name=".Login" />
+        <activity android:name=".CategoryListView"></activity>
+        <activity android:name=".CalendarView" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

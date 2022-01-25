@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 
 class register : AppCompatActivity() {
 
@@ -17,6 +18,8 @@ class register : AppCompatActivity() {
     btn_register1.setOnClickListener {
         var intent = Intent(this, Login:: class.java)
         startActivity(intent)
+
     }
+
 }
 }
