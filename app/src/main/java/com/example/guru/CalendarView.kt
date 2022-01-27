@@ -1,6 +1,8 @@
 package com.example.guru
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,16 +13,20 @@ import android.view.View
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.ListView
+import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import petrov.kristiyan.colorpicker.ColorPicker
 import java.text.SimpleDateFormat
+import java.util.ArrayList
 
 class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var calendarView: CalendarView
     lateinit var listView: ListView
 
     lateinit var drawerLayout: DrawerLayout
-    lateinit var drawerView : View
+    lateinit var drawerView: View
+
     // 메뉴 오픈 버튼 구현 lateinit var btn_menu_open : Button
     lateinit var navigationView: NavigationView
 
@@ -77,7 +83,7 @@ class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(Intent.createChooser(intent, "Browser"))
             }
             R.id.action_theme -> {
-
+                openColorPicker()
             }
             R.id.action_category -> {
                 val intent = Intent(this, CategoryListView::class.java)
@@ -88,5 +94,66 @@ class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    // 테마 변경 dialog
+    fun openColorPicker() {
+        val colorPicker = ColorPicker(this)
+        colorPicker.setTitle("변경할 색을 고르세요")
+        val colors = ArrayList<String>()
+
+        val redInt: Int = Color.parseColor("#9E1A20")
+        val blueInt: Int = Color.parseColor("#101077")
+        val yellowInt: Int = Color.parseColor("#FFB300")
+        val greenInt: Int = Color.parseColor("#205723")
+        val blackInt: Int = Color.parseColor("#000000")
+
+        colors.add("#9E1A20")
+        colors.add("#101077")
+        colors.add("#FFB300")
+        colors.add("#205723")
+        colors.add("#000000")
+
+        colorPicker.setColors(colors)
+            .setColumns(5)
+            .setRoundColorButton(true)
+            .setOnChooseColorListener(object : ColorPicker.OnChooseColorListener {
+                override fun onChooseColor(position: Int, color: Int) {
+                    // will be call only when Ok button was tapped
+                    //setTheme(color)
+
+                    when (color) {
+                        redInt -> {
+                            setTheme(R.style.Theme_Guru)
+                            setContentView(R.layout.activity_main)
+                        }
+                        blueInt -> {
+                            setTheme(R.style.Theme_Blue)
+                            setContentView(R.layout.activity_main)
+                        }
+                        yellowInt -> {
+                            setTheme(R.style.Theme_Yellow)
+                            setContentView(R.layout.activity_main)
+                        }
+                        greenInt -> {
+                            setTheme(R.style.Theme_Green)
+                            setContentView(R.layout.activity_main)
+                        }
+                        blackInt -> {
+                            setTheme(R.style.Theme_Black)
+                            setContentView(R.layout.activity_main)
+                        }
+                    }
+
+                    supportActionBar!!.setBackgroundDrawable(ColorDrawable(color))
+
+                    //supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#146775")))
+                    Toast.makeText(applicationContext, "테마 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onCancel() {
+
+                }
+            }).show()
     }
 }
