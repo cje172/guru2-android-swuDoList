@@ -9,11 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Guru">
+        <activity android:name=".EditCategory"></activity>
         <activity
             android:name=".register"
-            android:parentActivityName=".Login"/>
+            android:parentActivityName=".Login" />
         <activity android:name=".Login" />
-        <activity android:name=".CategoryListView"></activity>
+        <activity android:name=".CategoryListView" />
         <activity android:name=".CalendarView" />
         <activity android:name=".MainActivity">
             <intent-filter>
