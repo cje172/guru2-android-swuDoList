@@ -125,23 +125,23 @@ class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     when (color) {
                         redInt -> {
                             setTheme(R.style.Theme_Guru)
-                            setContentView(R.layout.activity_main)
+                            setContentView(R.layout.activity_calendar_view)
                         }
                         blueInt -> {
                             setTheme(R.style.Theme_Blue)
-                            setContentView(R.layout.activity_main)
+                            setContentView(R.layout.activity_calendar_view)
                         }
                         yellowInt -> {
                             setTheme(R.style.Theme_Yellow)
-                            setContentView(R.layout.activity_main)
+                            setContentView(R.layout.activity_calendar_view)
                         }
                         greenInt -> {
                             setTheme(R.style.Theme_Green)
-                            setContentView(R.layout.activity_main)
+                            setContentView(R.layout.activity_calendar_view)
                         }
                         blackInt -> {
                             setTheme(R.style.Theme_Black)
-                            setContentView(R.layout.activity_main)
+                            setContentView(R.layout.activity_calendar_view)
                         }
                     }
 
