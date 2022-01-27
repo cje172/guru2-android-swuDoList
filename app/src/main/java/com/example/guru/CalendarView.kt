@@ -8,13 +8,21 @@ import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.CalendarView
 import android.widget.ListView
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import java.text.SimpleDateFormat
 
-class CalendarView : AppCompatActivity() {
+class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var calendarView: CalendarView
     lateinit var listView: ListView
+
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var drawerView : View
+    // 메뉴 오픈 버튼 구현 lateinit var btn_menu_open : Button
+    lateinit var navigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +30,18 @@ class CalendarView : AppCompatActivity() {
 
         calendarView = findViewById(R.id.calendarView)
         listView = findViewById(R.id.listView)
+
+        drawerLayout = findViewById(R.id.cal_drawer_layout)
+        drawerView = findViewById(R.id.drawer_menu)
+        // 메뉴 오픈 버튼 연결 btn_menu_open = findViewById(R.id.   )
+
+        navigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+
+        // 메뉴 오픈 버튼 클릭 시
+        //btn_menu_open.setOnClickListener {
+        //    drawerLayout.openDrawer(drawerView)
+        //}
 
         // 달력 최소 날짜
         calendarView.minDate = SimpleDateFormat("yyyyMMdd").parse("20220101").time
@@ -38,7 +58,7 @@ class CalendarView : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.url_main -> {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.swu.ac.kr/"))
