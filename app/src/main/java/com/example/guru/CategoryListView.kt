@@ -27,8 +27,8 @@ class CategoryListView : AppCompatActivity() {
 
         categoryButton.setOnClickListener {
             // 카테고리 수정 화면으로 이동
-            // Intent intent = new Intent(this, 카테고리 수정 클래스::class.java)
-            // startActivity(intent)
+            val intent = Intent(this, EditCategory::class.java)
+            startActivity(intent)
         }
     }
 }
