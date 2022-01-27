@@ -1,7 +1,13 @@
 package com.example.guru
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.CalendarView
 import android.widget.ListView
 import java.text.SimpleDateFormat
@@ -25,9 +31,42 @@ class CalendarView : AppCompatActivity() {
         calendarView.setOnDateChangeListener { calendarView, year, month, day ->
             // 리스트뷰에 일정 출력
         }
+    }
 
-        listView.setOnItemClickListener { adapterView, view, i, l ->
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_list, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item?.itemId) {
+            R.id.url_main -> {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.swu.ac.kr/"))
+                startActivity(Intent.createChooser(intent, "Browser"))
+            }
+            R.id.url_lib -> {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://lib.swu.ac.kr/"))
+                startActivity(Intent.createChooser(intent, "Browser"))
+            }
+            R.id.url_info -> {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://swis.swu.ac.kr/"))
+                startActivity(Intent.createChooser(intent, "Browser"))
+            }
+            R.id.url_eport -> {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://eport.swu.ac.kr/"))
+                startActivity(Intent.createChooser(intent, "Browser"))
+            }
+            R.id.action_theme -> {
+
+            }
+            R.id.action_category -> {
+                val intent = Intent(this, CategoryListView::class.java)
+                startActivity(intent)
+            }
+            R.id.action_logout -> {
+
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
 }
