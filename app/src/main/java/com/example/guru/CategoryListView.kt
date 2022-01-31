@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 
-class CategoryListView : AppCompatActivity() {
+open class CategoryListView : CalendarView() {
     lateinit var categoryTextView: TextView
     lateinit var categoryListView: ListView
     lateinit var categoryButton: Button

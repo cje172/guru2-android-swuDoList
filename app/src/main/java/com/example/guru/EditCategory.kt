@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 
-class EditCategory : AppCompatActivity() {
+class EditCategory : CategoryListView() {
 
     lateinit var addButton: Button
     lateinit var modifyButton: Button

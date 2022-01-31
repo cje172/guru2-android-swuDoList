@@ -1,11 +1,13 @@
 package com.example.guru
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
@@ -15,12 +17,21 @@ import android.widget.CalendarView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.guru.ThemeConstant.appColor
+import com.example.guru.ThemeConstant.appTheme
+import com.example.guru.ThemeConstant.app_preferences
+import com.example.guru.ThemeConstant.constant
+import com.example.guru.ThemeConstant.editor
+import com.example.guru.ThemeConstant.sharedPreferences
+import com.example.guru.ThemeConstant.themeColor
+import com.example.guru.ThemeConstant.themeMethods
 import com.google.android.material.navigation.NavigationView
 import petrov.kristiyan.colorpicker.ColorPicker
 import java.text.SimpleDateFormat
 import java.util.ArrayList
 
-class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+@Suppress("DEPRECATION")
+open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var calendarView: CalendarView
     lateinit var listView: ListView
 
@@ -32,6 +43,23 @@ class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 테마 변경 설정
+        app_preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        appColor = app_preferences.getInt("color", 0)
+        appTheme = app_preferences.getInt("theme", 0)
+        themeColor = appColor
+        constant?.color = appColor
+
+        when {
+            themeColor == 0 -> setTheme(ThemeConstant.theme)
+            appTheme == 0 -> setTheme(ThemeConstant.theme)
+            else -> setTheme(appTheme)
+        }
+
+        themeMethods = ThemeMethods()
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        editor = sharedPreferences.edit()
+
         setContentView(R.layout.activity_calendar_view)
 
         calendarView = findViewById(R.id.calendarView)
@@ -96,17 +124,12 @@ class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return super.onOptionsItemSelected(item)
     }
 
-    // 테마 변경 dialog
-    fun openColorPicker() {
+
+    // 테마 변경 ColorPicker Dialog
+    private fun openColorPicker() {
         val colorPicker = ColorPicker(this)
         colorPicker.setTitle("변경할 색을 고르세요")
         val colors = ArrayList<String>()
-
-        val redInt: Int = Color.parseColor("#9E1A20")
-        val blueInt: Int = Color.parseColor("#101077")
-        val yellowInt: Int = Color.parseColor("#FFB300")
-        val greenInt: Int = Color.parseColor("#205723")
-        val blackInt: Int = Color.parseColor("#000000")
 
         colors.add("#9E1A20")
         colors.add("#101077")
@@ -119,40 +142,21 @@ class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .setRoundColorButton(true)
             .setOnChooseColorListener(object : ColorPicker.OnChooseColorListener {
                 override fun onChooseColor(position: Int, color: Int) {
-                    // will be call only when Ok button was tapped
-                    //setTheme(color)
+                    // OK 버튼 클릭 시
+                    ThemeConstant.color = color
+                    themeMethods?.setColorTheme()
 
-                    when (color) {
-                        redInt -> {
-                            setTheme(R.style.Theme_Guru)
-                            setContentView(R.layout.activity_calendar_view)
-                        }
-                        blueInt -> {
-                            setTheme(R.style.Theme_Blue)
-                            setContentView(R.layout.activity_calendar_view)
-                        }
-                        yellowInt -> {
-                            setTheme(R.style.Theme_Yellow)
-                            setContentView(R.layout.activity_calendar_view)
-                        }
-                        greenInt -> {
-                            setTheme(R.style.Theme_Green)
-                            setContentView(R.layout.activity_calendar_view)
-                        }
-                        blackInt -> {
-                            setTheme(R.style.Theme_Black)
-                            setContentView(R.layout.activity_calendar_view)
-                        }
-                    }
+                    editor.putInt("color", color)
+                    editor.putInt("theme", ThemeConstant.theme)
+                    editor.commit()
 
-                    supportActionBar!!.setBackgroundDrawable(ColorDrawable(color))
+                    recreate()
 
-                    //supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#146775")))
                     Toast.makeText(applicationContext, "테마 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onCancel() {
-
+                    // 취소 버튼 클릭 시
                 }
             }).show()
     }
