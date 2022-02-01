@@ -77,11 +77,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareroundb"
-        android:text="앱 이름"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="45dp"
+        android:text="슈Do-List"
+        app:layout_constraintBottom_toTopOf="@+id/et_id"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="161dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
