@@ -7,61 +7,45 @@ import android.text.InputType
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 class EditCategory : CategoryListView() {
 
     lateinit var addButton: Button
-    lateinit var modifyButton: Button
-    lateinit var deleteButton: Button
+    lateinit var categoryEditText: EditText
+    lateinit var categoryName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_category)
 
+        // 뒤로가기 버튼
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         addButton = findViewById<Button>(R.id.addButton)
-        modifyButton = findViewById<Button>(R.id.modifyButton)
-        deleteButton = findViewById<Button>(R.id.deleteButton)
+        categoryEditText = findViewById<EditText>(R.id.categoryEditText)
+        categoryListView = findViewById(R.id.categoryListView)
 
 
-        // 추가 버튼 클릭 시
+        // 리스트뷰에 어댑터 연결
+        var list = arrayListOf<String>("수업", "동아리") // 테스트
+        var adapter = ListViewAdapter(this, list)
+        categoryListView.adapter = adapter
+
+        // 카테고리 추가 버튼 클릭 시
         addButton.setOnClickListener(View.OnClickListener {
-            showDialog()
+            categoryName = categoryEditText.text.toString()
 
-            // 아이템 추가
-            //list.add(categoryName)
+            if (categoryName.isEmpty()) {
+                Toast.makeText(applicationContext, "카테고리 이름을 입력하세요", Toast.LENGTH_SHORT).show()
+            } else {
+                // 아이템 추가
+                list.add(categoryName)
+                // listview 갱신
+                adapter.notifyDataSetChanged()
 
-            // listview 갱신
-            //adapter.notifyDataSetChanged()
+                categoryEditText.setText("")
+            }
         })
-        // 수정 버튼 클릭 시
-
-        // 삭제 버튼 클릭 시
     }
-
-    fun showDialog() {
-        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
-        builder.setTitle("카테고리 추가")
-
-        // Set up the input
-        val input = EditText(this)
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setHint("추가할 카테고리 이름 입력")
-        input.inputType = InputType.TYPE_CLASS_TEXT
-        builder.setView(input)
-
-        // Set up the buttons
-        builder.setPositiveButton(
-            "OK",
-            DialogInterface.OnClickListener { dialog, which ->
-                // Here you get get input text from the Edittext
-                var categoryName = input.text.toString()
-            })
-        builder.setNegativeButton(
-            "Cancel",
-            DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
-
-        builder.show()
-
-    }
-
 }

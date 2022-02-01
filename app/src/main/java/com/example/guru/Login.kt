@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 
-class Login : AppCompatActivity() {
+class Login : CalendarView() {
 
     lateinit var btn_register: Button
     lateinit var btn_login : Button
