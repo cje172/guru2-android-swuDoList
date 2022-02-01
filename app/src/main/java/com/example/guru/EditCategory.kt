@@ -43,7 +43,7 @@ class EditCategory : CategoryListView() {
                 list.add(categoryName)
                 // listview 갱신
                 adapter.notifyDataSetChanged()
-
+                Toast.makeText(applicationContext, "카테고리가 추가되었습니다", Toast.LENGTH_SHORT).show()
                 categoryEditText.setText("")
             }
         })
