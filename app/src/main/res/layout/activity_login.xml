@@ -78,6 +78,8 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="45dp"
         android:text="슈Do-List"
+        android:fontFamily="@font/nanumsquareroundb"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@+id/et_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

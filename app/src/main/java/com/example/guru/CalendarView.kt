@@ -1,5 +1,6 @@
 package com.example.guru
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -14,6 +15,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import android.widget.CalendarView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.guru.ThemeConstant.appColor
@@ -111,7 +113,26 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 startActivity(intent)
             }
             R.id.action_logout -> {
+                var dialog = AlertDialog.Builder(this)
+                dialog.setTitle("로그아웃을 하시겠습니까?")
 
+                fun toast_p(){
+                    Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+                    var intent = Intent(this, Login:: class.java)
+                    startActivity(intent)
+                }
+
+                var dialog_listener = object: DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        when(which){
+                            DialogInterface.BUTTON_POSITIVE->
+                                toast_p()
+                        }
+                    }
+                }
+                dialog.setPositiveButton("네",dialog_listener)
+                dialog.setNegativeButton("아니오", null)
+                dialog.show()
             }
         }
         // 네비게이션 뷰 닫기
