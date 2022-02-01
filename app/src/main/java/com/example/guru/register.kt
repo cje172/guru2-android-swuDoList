@@ -15,14 +15,13 @@ class register : AppCompatActivity() {
 
         btn_register1 = findViewById(R.id.btn_register1)
 
+
         btn_register1.setOnClickListener {
             var intent = Intent(this, Login::class.java)
             startActivity(intent)
 
+            Toast.makeText(this@register, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
-        btn_register1.setOnClickListener {
-            Toast.makeText(this@register, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
-        }
     }
     }
