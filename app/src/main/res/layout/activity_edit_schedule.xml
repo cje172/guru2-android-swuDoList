@@ -12,38 +12,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="8dp">
+        android:padding="10dp">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:spinnerMode="dropdown" />
 
         <EditText
             android:id="@+id/add_todo"
-            android:layout_width="310dp"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="추가" />
+            android:hint="할 일"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
 
+        <ImageButton
+            android:id="@+id/add_todo_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/add_button"
+            android:background="@color/white"
+            android:scaleType="centerCrop" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:orientation="vertical"
-            android:id="@+id/todo_list"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="16dp">
-        </LinearLayout>
+            android:id="@+id/recyclerTodo"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_recycler">
+        </androidx.recyclerview.widget.RecyclerView>
 
     </ScrollView>
 

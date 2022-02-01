@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Guru" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.Guru" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
 
         <item name="colorPrimary">@color/red</item>
@@ -16,7 +16,7 @@
     </style>
 
     <!-- Blue 테마 -->
-    <style name="Theme.Blue" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.Blue" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/blue_500</item>
         <item name="colorPrimaryVariant">@color/blue_700</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -25,7 +25,7 @@
     </style>
 
     <!-- Yellow 테마 -->
-    <style name="Theme.Yellow" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.Yellow" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/yellow_500</item>
         <item name="colorPrimaryVariant">@color/yellow_700</item>
         <item name="colorOnPrimary">@color/white</item>
