@@ -30,6 +30,22 @@ class SQLiteHelper(
         writableDatabase.close()
     }
 
+    // select 메소드
+    fun selectTodo() : MutableList<Data> {
+        val list = mutableListOf<Data>()
+        val selectAll = "SELECT * FROM data"
+        val cursor = readableDatabase.rawQuery(selectAll, null)
+
+        while (cursor.moveToNext()) {
+            val content = cursor.getString(cursor.getColumnIndex("content"))
+            list.add(Data(content))
+        }
+        cursor.close()
+        readableDatabase.close()
+
+        return list
+    }
+
     // delete 메소드 : todo 삭제
     fun deleteData(data: Data) {
     }

@@ -28,6 +28,7 @@
             android:layout_marginRight="15dp"/>
 
         <ImageButton
+            android:id="@+id/add_todo_btn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -45,7 +46,7 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:orientation="vertical"
-            android:id="@+id/recyclerMemo"
+            android:id="@+id/recyclerTodo"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_recycler">
         </androidx.recyclerview.widget.RecyclerView>
