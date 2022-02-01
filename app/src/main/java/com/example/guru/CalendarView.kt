@@ -4,44 +4,41 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ContextMenu
-import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
 import android.widget.CalendarView
+import android.widget.ImageView
 import android.widget.ListView
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import java.text.SimpleDateFormat
 
 class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    lateinit var btnNav: ImageView
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navigationView: NavigationView
+
     lateinit var calendarView: CalendarView
     lateinit var listView: ListView
-
-    lateinit var drawerLayout: DrawerLayout
-    lateinit var drawerView : View
-    // 메뉴 오픈 버튼 구현 lateinit var btn_menu_open : Button
-    lateinit var navigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar_view)
 
-        calendarView = findViewById(R.id.calendarView)
-        listView = findViewById(R.id.listView)
-
         drawerLayout = findViewById(R.id.cal_drawer_layout)
-        drawerView = findViewById(R.id.drawer_menu)
-        // 메뉴 오픈 버튼 연결 btn_menu_open = findViewById(R.id.   )
-
+        btnNav = findViewById(R.id.btn_nav)
         navigationView = findViewById(R.id.nav_view)
+
+        // 네비게이션 메뉴 버튼 클릭 시 네비게이션 드로어 열기
+        btnNav.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.END)
+        }
+
+        // 네비게이션 메뉴 아이템에 클릭 속성 부여
         navigationView.setNavigationItemSelectedListener(this)
 
-        // 메뉴 오픈 버튼 클릭 시
-        //btn_menu_open.setOnClickListener {
-        //    drawerLayout.openDrawer(drawerView)
-        //}
+        calendarView = findViewById(R.id.calendarView)
+        listView = findViewById(R.id.listView)
 
         // 달력 최소 날짜
         calendarView.minDate = SimpleDateFormat("yyyyMMdd").parse("20220101").time
@@ -53,13 +50,9 @@ class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_list, menu)
-        return true
-    }
-
+    // 네비게이션 메뉴 아이템 클릭 시 수행
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.url_main -> {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.swu.ac.kr/"))
                 startActivity(Intent.createChooser(intent, "Browser"))
@@ -87,6 +80,17 @@ class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
         }
-        return super.onOptionsItemSelected(item)
+        // 네비게이션 뷰 닫기
+        drawerLayout.closeDrawers()
+        return false
+    }
+
+    // back button 클릭 시 수행 함수
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.closeDrawers()
+        } else {
+            super.onBackPressed()
+        }
     }
 }
