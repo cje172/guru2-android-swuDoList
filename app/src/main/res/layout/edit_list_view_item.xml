@@ -12,6 +12,7 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="10dp"
         android:layout_weight="1"
+        android:fontFamily="@font/nanumsquareroundb"
         android:text="카테고리 이름 수정"
         android:textSize="20dp" />
 

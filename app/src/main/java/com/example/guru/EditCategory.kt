@@ -1,9 +1,6 @@
 package com.example.guru
 
-import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,6 +11,8 @@ class EditCategory : CategoryListView() {
     lateinit var addButton: Button
     lateinit var categoryEditText: EditText
     lateinit var categoryName: String
+
+    //lateinit var helper : CategoryDBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +27,13 @@ class EditCategory : CategoryListView() {
 
 
         // 리스트뷰에 어댑터 연결
-        var list = arrayListOf<String>("수업", "동아리") // 테스트
-        var adapter = ListViewAdapter(this, list)
+        var list = arrayListOf<String>()
+        var adapter = EditListViewAdapter(this, list)
+
+        categoryHelper = CategoryDBHelper(this, "CategoryData.db", null, 1)
+        adapter.list.addAll(categoryHelper.selectCategory())
+        adapter.helper = categoryHelper
+
         categoryListView.adapter = adapter
 
         // 카테고리 추가 버튼 클릭 시
@@ -41,6 +45,11 @@ class EditCategory : CategoryListView() {
             } else {
                 // 아이템 추가
                 list.add(categoryName)
+                categoryHelper.insertCategory(categoryName)
+
+                adapter.list.clear()
+                adapter.list.addAll(categoryHelper.selectCategory())
+
                 // listview 갱신
                 adapter.notifyDataSetChanged()
                 Toast.makeText(applicationContext, "카테고리가 추가되었습니다", Toast.LENGTH_SHORT).show()

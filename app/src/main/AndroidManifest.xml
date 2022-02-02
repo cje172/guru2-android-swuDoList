@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Guru">
-        <activity android:name=".EditCategory" android:parentActivityName=".CategoryListView" />
         <activity
             android:name=".register"
             android:parentActivityName=".Login" />
@@ -20,10 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".CategoryListView" />
+        <activity android:name=".EditCategory" android:parentActivityName=".CategoryListView" />
+        <activity android:name=".CategoryListView" android:parentActivityName=".CalendarView" />
         <activity android:name=".CalendarView" />
-        <activity android:name=".EditSchedule" />
+        <activity android:name=".EditSchedule" android:parentActivityName=".CalendarView" />
         <activity android:name=".MainActivity">
 
         </activity>

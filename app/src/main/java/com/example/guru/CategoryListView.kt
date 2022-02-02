@@ -1,7 +1,6 @@
 package com.example.guru
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ListView
@@ -12,9 +11,14 @@ open class CategoryListView : CalendarView() {
     lateinit var categoryListView: ListView
     lateinit var categoryButton: Button
 
+    lateinit var categoryHelper : CategoryDBHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_view)
+
+        // 뒤로가기 버튼
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         categoryTextView = findViewById(R.id.categoryTextView)
         categoryListView = findViewById(R.id.categoryListView)
@@ -23,6 +27,11 @@ open class CategoryListView : CalendarView() {
         // 리스트뷰에 어댑터 연결
         var list = arrayListOf<String>()
         var adapter = ListViewAdapter(this, list)
+
+        categoryHelper = CategoryDBHelper(this, "CategoryData.db", null, 1)
+        adapter.list.addAll(categoryHelper.selectCategory())
+        adapter.helper = categoryHelper
+
         categoryListView.adapter = adapter
 
         categoryButton.setOnClickListener {
