@@ -16,7 +16,11 @@ class EditScheduleAdapter : RecyclerView.Adapter<EditScheduleAdapter.Holder>() {
         return Holder(view).apply {
             // 삭제(휴지통) 버튼 클릭 시
             itemView.todoDelBtn.setOnClickListener {
+                var cursor = adapterPosition
 
+                helper!!.deleteData(listData.get(cursor))
+                listData.remove(listData.get(cursor))
+                notifyDataSetChanged()
             }
         }
     }

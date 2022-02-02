@@ -48,5 +48,8 @@ class SQLiteHelper(
 
     // delete 메소드 : todo 삭제
     fun deleteData(data: Data) {
+        val delete = "DELETE FROM data WHERE content = '" + data.content + "';"
+        writableDatabase.execSQL(delete)
+        writableDatabase.close()
     }
 }
