@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 
-    // itemView 사용하기 위한 코드 추가
+    // kotlinx 오류 관련 코드 추가
     id 'kotlin-android-extensions'
 }
 
