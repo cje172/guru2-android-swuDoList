@@ -106,7 +106,7 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 startActivity(Intent.createChooser(intent, "Browser"))
             }
             R.id.action_theme -> {
-
+                openColorPicker()
             }
             R.id.action_category -> {
                 val intent = Intent(this, CategoryListView::class.java)
