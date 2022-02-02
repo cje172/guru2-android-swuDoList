@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 
-class register : AppCompatActivity() {
+class register : CalendarView() {
 
     lateinit var btn_register1: Button
     override fun onCreate(savedInstanceState: Bundle?) {

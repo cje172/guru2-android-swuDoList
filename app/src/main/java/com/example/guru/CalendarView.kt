@@ -1,5 +1,6 @@
 package com.example.guru
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -12,10 +13,10 @@ import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
+import android.widget.*
 import android.widget.CalendarView
-import android.widget.ListView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.guru.ThemeConstant.appColor
 import com.example.guru.ThemeConstant.appTheme
@@ -32,14 +33,12 @@ import java.util.ArrayList
 
 @Suppress("DEPRECATION")
 open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    lateinit var btnNav: ImageView
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navigationView: NavigationView
+
     lateinit var calendarView: CalendarView
     lateinit var listView: ListView
-
-    lateinit var drawerLayout: DrawerLayout
-    lateinit var drawerView: View
-
-    // 메뉴 오픈 버튼 구현 lateinit var btn_menu_open : Button
-    lateinit var navigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,20 +61,20 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         setContentView(R.layout.activity_calendar_view)
 
-        calendarView = findViewById(R.id.calendarView)
-        listView = findViewById(R.id.listView)
-
         drawerLayout = findViewById(R.id.cal_drawer_layout)
-        drawerView = findViewById(R.id.drawer_menu)
-        // 메뉴 오픈 버튼 연결 btn_menu_open = findViewById(R.id.   )
-
+        btnNav = findViewById(R.id.btn_nav)
         navigationView = findViewById(R.id.nav_view)
+
+        // 네비게이션 메뉴 버튼 클릭 시 네비게이션 드로어 열기
+        btnNav.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.END)
+        }
+
+        // 네비게이션 메뉴 아이템에 클릭 속성 부여
         navigationView.setNavigationItemSelectedListener(this)
 
-        // 메뉴 오픈 버튼 클릭 시
-        //btn_menu_open.setOnClickListener {
-        //    drawerLayout.openDrawer(drawerView)
-        //}
+        calendarView = findViewById(R.id.calendarView)
+        listView = findViewById(R.id.listView)
 
         // 달력 최소 날짜
         calendarView.minDate = SimpleDateFormat("yyyyMMdd").parse("20220101").time
@@ -87,13 +86,9 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_list, menu)
-        return true
-    }
-
+    // 네비게이션 메뉴 아이템 클릭 시 수행
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.url_main -> {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.swu.ac.kr/"))
                 startActivity(Intent.createChooser(intent, "Browser"))
@@ -111,19 +106,39 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 startActivity(Intent.createChooser(intent, "Browser"))
             }
             R.id.action_theme -> {
-                openColorPicker()
+
             }
             R.id.action_category -> {
                 val intent = Intent(this, CategoryListView::class.java)
                 startActivity(intent)
             }
             R.id.action_logout -> {
+                var dialog = AlertDialog.Builder(this)
+                dialog.setTitle("로그아웃을 하시겠습니까?")
 
+                fun toast_p(){
+                    Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+                    var intent = Intent(this, Login:: class.java)
+                    startActivity(intent)
+                }
+
+                var dialog_listener = object: DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        when(which){
+                            DialogInterface.BUTTON_POSITIVE->
+                                toast_p()
+                        }
+                    }
+                }
+                dialog.setPositiveButton("네",dialog_listener)
+                dialog.setNegativeButton("아니오", null)
+                dialog.show()
             }
         }
-        return super.onOptionsItemSelected(item)
+        // 네비게이션 뷰 닫기
+        drawerLayout.closeDrawers()
+        return false
     }
-
 
     // 테마 변경 ColorPicker Dialog
     private fun openColorPicker() {

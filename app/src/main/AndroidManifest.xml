@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Guru">
-        <activity android:name=".EditCategory"></activity>
+        <activity android:name=".EditCategory" android:parentActivityName=".CategoryListView" />
         <activity
             android:name=".register"
             android:parentActivityName=".Login" />
