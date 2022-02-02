@@ -23,6 +23,7 @@
 
         <activity android:name=".CategoryListView" />
         <activity android:name=".CalendarView" />
+        <activity android:name=".EditSchedule" />
         <activity android:name=".MainActivity">
 
         </activity>

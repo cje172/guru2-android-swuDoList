@@ -3,6 +3,8 @@ package com.example.guru
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -17,7 +19,11 @@ import android.widget.*
 import android.widget.CalendarView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.guru.ThemeConstant.appColor
 import com.example.guru.ThemeConstant.appTheme
 import com.example.guru.ThemeConstant.app_preferences
@@ -27,6 +33,8 @@ import com.example.guru.ThemeConstant.sharedPreferences
 import com.example.guru.ThemeConstant.themeColor
 import com.example.guru.ThemeConstant.themeMethods
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_calendar_view.*
+import kotlinx.android.synthetic.main.activity_edit_schedule.*
 import petrov.kristiyan.colorpicker.ColorPicker
 import java.text.SimpleDateFormat
 import java.util.ArrayList
@@ -38,7 +46,11 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
     lateinit var navigationView: NavigationView
 
     lateinit var calendarView: CalendarView
-    lateinit var listView: ListView
+    lateinit var editScheduleButton: Button
+    lateinit var recyclerView: RecyclerView
+
+    lateinit var helper: SQLiteHelper
+    lateinit var sqlitedb: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,15 +86,30 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
         navigationView.setNavigationItemSelectedListener(this)
 
         calendarView = findViewById(R.id.calendarView)
-        listView = findViewById(R.id.listView)
+        recyclerView = findViewById(R.id.recyclerView)
 
         // 달력 최소 날짜
         calendarView.minDate = SimpleDateFormat("yyyyMMdd").parse("20220101").time
         // 달력 최대 날짜
         calendarView.maxDate = SimpleDateFormat("yyyyMMdd").parse("20221231").time
-        // 선택 날짜 일정 출력
+        // 선택한 날짜에 해당하는 일정 출력
+        helper = SQLiteHelper(this, "TodoData", null, 1)
+
+        val adapter = EditScheduleAdapter()
+        adapter.listData.addAll(helper.selectTodo())
+        adapter.helper = helper
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
         calendarView.setOnDateChangeListener { calendarView, year, month, day ->
-            // 리스트뷰에 일정 출력
+
+        }
+
+        editScheduleButton = findViewById(R.id.editScheduleButton)
+        editScheduleButton.setOnClickListener {
+            val intent = Intent(this, EditSchedule::class.java)
+            startActivity(intent)
         }
     }
 
@@ -133,6 +160,7 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 dialog.setPositiveButton("네",dialog_listener)
                 dialog.setNegativeButton("아니오", null)
                 dialog.show()
+                helper.close()
             }
         }
         // 네비게이션 뷰 닫기

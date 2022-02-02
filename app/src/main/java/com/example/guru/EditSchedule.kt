@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_edit_schedule.*
 
 class EditSchedule : AppCompatActivity() {
-    lateinit var add_todo_btn : Button
+    lateinit var add_todo_btn : ImageButton
     lateinit var add_todo_text : EditText
     lateinit var helper : SQLiteHelper
 
