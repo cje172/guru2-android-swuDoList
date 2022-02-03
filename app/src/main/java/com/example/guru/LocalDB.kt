@@ -64,8 +64,6 @@ class LocalDB (
         val selectionArgs = arrayOf(id, hak, name, password)
 
 
-
-
         val cursor = db.query(
             LocalDatas.userData.TABLE_NAME,
             projection,
