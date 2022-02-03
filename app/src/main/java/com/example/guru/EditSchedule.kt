@@ -18,9 +18,6 @@ class EditSchedule : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_schedule)
 
-        // 뒤로가기 버튼
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         add_todo_btn = findViewById(R.id.add_todo_btn)
         add_todo_text = findViewById(R.id.add_todo)
 

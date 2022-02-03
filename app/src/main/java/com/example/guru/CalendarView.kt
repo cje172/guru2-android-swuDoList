@@ -93,17 +93,17 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
         // 달력 최대 날짜
         calendarView.maxDate = SimpleDateFormat("yyyyMMdd").parse("20221231").time
         // 선택한 날짜에 해당하는 일정 출력
-        helper = SQLiteHelper(this, "TodoData", null, 1)
-
-        val adapter = EditScheduleAdapter()
-        adapter.listData.addAll(helper.selectTodo())
-        adapter.helper = helper
-
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
         calendarView.setOnDateChangeListener { calendarView, year, month, day ->
+            helper = SQLiteHelper(this, "TodoData", null, 1)
 
+            val adapter = EditScheduleAdapter()
+            adapter.listData.addAll(helper.selectTodo())
+            adapter.helper = helper
+
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+            helper.close()
         }
 
         editScheduleButton = findViewById(R.id.editScheduleButton)
@@ -160,7 +160,6 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 dialog.setPositiveButton("네",dialog_listener)
                 dialog.setNegativeButton("아니오", null)
                 dialog.show()
-                helper.close()
             }
         }
         // 네비게이션 뷰 닫기

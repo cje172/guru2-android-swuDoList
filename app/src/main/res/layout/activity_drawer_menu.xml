@@ -9,39 +9,11 @@
     android:background="?attr/colorPrimary"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ooo님"
-            android:textSize="40dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/nanumsquareroundb"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"/>
-        <TextView
-            android:id="@+id/student_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="학번 : 1111111111"
-            android:textSize="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/nanumsquareroundb"
-            android:paddingLeft="20dp"
-            android:paddingBottom="20dp"/>
-
-    </LinearLayout>
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:headerLayout="@layout/menu_header"
         app:menu="@menu/menu_list" />
 
 </LinearLayout>
