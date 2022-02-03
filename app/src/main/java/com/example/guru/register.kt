@@ -1,10 +1,10 @@
 package com.example.guru
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_register.*
 
 class register : CalendarView() {
 
@@ -17,11 +17,8 @@ class register : CalendarView() {
 
 
         btn_register1.setOnClickListener {
-            var intent = Intent(this, Login::class.java)
-            startActivity(intent)
 
-            Toast.makeText(this@register, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+
         }
-
     }
-    }
+}

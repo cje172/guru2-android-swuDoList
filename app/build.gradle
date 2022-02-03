@@ -4,6 +4,9 @@ plugins {
 
     // kotlinx 오류 관련 코드 추가
     id 'kotlin-android-extensions'
+
+    //로그인 회원가입 db
+    id 'kotlin-kapt'
 }
 
 android {
@@ -37,6 +40,15 @@ android {
 
 dependencies {
 
+
+
+    //로그인 회원가입 db
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:glide:4.11.0'
+    //로그인 회원가입 db
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -48,4 +60,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
+    implementation 'com.android.volley:volley:1.1.1'//서버통신 관련 라이브러리
 }
