@@ -12,8 +12,6 @@ class EditCategory : CategoryListView() {
     lateinit var categoryEditText: EditText
     lateinit var categoryName: String
 
-    //lateinit var helper : CategoryDBHelper
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_category)
@@ -24,7 +22,6 @@ class EditCategory : CategoryListView() {
         addButton = findViewById<Button>(R.id.addButton)
         categoryEditText = findViewById<EditText>(R.id.categoryEditText)
         categoryListView = findViewById(R.id.categoryListView)
-
 
         // 리스트뷰에 어댑터 연결
         var list = arrayListOf<String>()
@@ -50,7 +47,7 @@ class EditCategory : CategoryListView() {
                 adapter.list.clear()
                 adapter.list.addAll(categoryHelper.selectCategory())
 
-                // listview 갱신
+                // ListView 갱신
                 adapter.notifyDataSetChanged()
                 Toast.makeText(applicationContext, "카테고리가 추가되었습니다", Toast.LENGTH_SHORT).show()
                 categoryEditText.setText("")
