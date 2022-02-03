@@ -13,7 +13,7 @@ class SQLiteHelper(
     : SQLiteOpenHelper(context, name, factory, version) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val create = "CREATE TABLE data (content text)"
+        val create = "CREATE TABLE data (selectedCategory text, content text)"
         db!!.execSQL(create)
     }
 
@@ -25,6 +25,7 @@ class SQLiteHelper(
     // insert 메소드 : todo 추가
     fun insertTodo(data: Data) {
         val values = ContentValues()
+        values.put("selectedCategory", data.selectedCategory)
         values.put("content", data.content)
         writableDatabase.insert("data", null, values)
         writableDatabase.close()
@@ -37,8 +38,10 @@ class SQLiteHelper(
         val cursor = readableDatabase.rawQuery(selectAll, null)
 
         while (cursor.moveToNext()) {
+            val selectedCategory = cursor.getString(cursor.getColumnIndex("selectedCategory"))
             val content = cursor.getString(cursor.getColumnIndex("content"))
-            list.add(Data(content))
+
+            list.add(Data(selectedCategory, content))
         }
         cursor.close()
         readableDatabase.close()

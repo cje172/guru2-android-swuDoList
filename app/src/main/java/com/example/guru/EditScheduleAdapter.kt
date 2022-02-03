@@ -36,6 +36,7 @@ class EditScheduleAdapter : RecyclerView.Adapter<EditScheduleAdapter.Holder>() {
 
     class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun setItem(item : Data) {
+            itemView.categoryText.text = item.selectedCategory.toString()
             itemView.todoText.text = item.content.toString()
         }
     }
