@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Button
 import android.widget.Toast
-import petrov.kristiyan.colorpicker.ColorPicker
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
