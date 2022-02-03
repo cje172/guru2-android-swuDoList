@@ -59,8 +59,9 @@ class LocalDB (
 
         val projection = arrayOf(BaseColumns._ID)
 
-        val selection = "${LocalDatas.userData.COLUMN_NAME_ID} = ?"
-        val selectionArgs = arrayOf(id)
+        val selection = "${LocalDatas.userData.COLUMN_NAME_ID}, ${LocalDatas.userData.COLUMN_NAME_HAK}," +
+                " ${LocalDatas.userData.COLUMN_NAME_NAME}, ${LocalDatas.userData.COLUMN_NAME_PASSWORD} = ?"
+        val selectionArgs = arrayOf(id, hak, name, password)
 
 
 
