@@ -2,18 +2,8 @@ package com.example.guru
 
 import android.content.Intent
 import android.os.Bundle
-import android.telecom.Call
-import android.util.Log
 import android.widget.Button
-import android.widget.EditText
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.Body as Retrofit2HttpBody
+
 
 class Login : CalendarView() {
 
@@ -33,7 +23,8 @@ class Login : CalendarView() {
         }
 
         btn_login.setOnClickListener {
-
+            var intent = Intent(this, CalendarView::class.java)
+            startActivity(intent)
         }
     }
 }

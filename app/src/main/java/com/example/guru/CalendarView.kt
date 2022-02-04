@@ -41,7 +41,7 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
     lateinit var recyclerView: RecyclerView
 
     lateinit var helper: SQLiteHelper
-    lateinit var sqlitedb: SQLiteDatabase
+    open lateinit var sqlitedb: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

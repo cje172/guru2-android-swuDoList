@@ -7,6 +7,7 @@ plugins {
 
     //로그인 회원가입 db
     id 'kotlin-kapt'
+
 }
 
 android {
@@ -39,15 +40,6 @@ android {
 }
 
 dependencies {
-
-
-
-    //로그인 회원가입 db
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    kapt 'com.github.bumptech.glide:glide:4.11.0'
-    //로그인 회원가입 db
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
