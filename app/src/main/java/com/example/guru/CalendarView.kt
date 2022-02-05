@@ -7,10 +7,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.MenuItem
-import android.widget.Button
+import android.view.View
+import android.widget.*
 import android.widget.CalendarView
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -26,9 +25,13 @@ import com.example.guru.ThemeConstant.sharedPreferences
 import com.example.guru.ThemeConstant.themeColor
 import com.example.guru.ThemeConstant.themeMethods
 import com.google.android.material.navigation.NavigationView
+import org.w3c.dom.Text
 import petrov.kristiyan.colorpicker.ColorPicker
+import java.io.BufferedReader
+import java.io.FileReader
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
 
 @Suppress("DEPRECATION")
 open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +45,11 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     lateinit var helper: SQLiteHelper
     open lateinit var sqlitedb: SQLiteDatabase
+
+    // 선택된 연도, 월, 일
+    var selectedYear by Delegates.notNull<Int>()
+    var selectedMonth by Delegates.notNull<Int>()
+    var selectedDay by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +85,6 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
         navigationView.setNavigationItemSelectedListener(this)
 
         calendarView = findViewById(R.id.calendarView)
-        recyclerView = findViewById(R.id.recyclerView)
 
         // 달력 최소 날짜
         calendarView.minDate = SimpleDateFormat("yyyyMMdd").parse("20220101").time
@@ -85,21 +92,34 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
         calendarView.maxDate = SimpleDateFormat("yyyyMMdd").parse("20221231").time
         // 선택한 날짜에 해당하는 일정 출력
         calendarView.setOnDateChangeListener { calendarView, year, month, day ->
-            helper = SQLiteHelper(this, "TodoData", null, 1)
+            selectedYear = year
+            selectedMonth = month + 1
+            selectedDay = day
 
-            val adapter = EditScheduleAdapter()
-            adapter.listData.addAll(helper.selectTodo())
-            adapter.helper = helper
+            var fileName = selectedYear.toString() + "_" + selectedMonth + "_" + selectedDay + ".txt"
 
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(this)
+            try {
+                var inFs = openFileInput(fileName)
+                val fileData = ByteArray(inFs.available())
+                inFs.read(fileData)
+                inFs.close()
 
-            helper.close()
+                var str = String(fileData)
+                var tv: TextView = findViewById(R.id.tv1)
+                tv.text = str
+                tv.visibility = View.VISIBLE
+            } catch (e: Exception) {
+                var tv: TextView = findViewById(R.id.tv1)
+                tv.text = ""
+            }
         }
 
         editScheduleButton = findViewById(R.id.editScheduleButton)
         editScheduleButton.setOnClickListener {
             val intent = Intent(this, EditSchedule::class.java)
+            intent.putExtra("year", selectedYear)
+            intent.putExtra("month", selectedMonth)
+            intent.putExtra("day", selectedDay)
             startActivity(intent)
         }
     }
