@@ -51,6 +51,7 @@ class EditListViewAdapter(val context: Context, val list: ArrayList<String>) : B
             val dialogTitle: TextView = customView.findViewById(R.id.dialogTitle)
 
             input.setText(selectedList)
+            input.setSelection(input.length())
             dialogTitle.text = "카테고리 수정"
 
             builder.setView(customView)
