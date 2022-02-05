@@ -41,6 +41,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:text="일정 수정하기"
+            android:fontFamily="@font/nanumsquareroundb"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -48,9 +49,9 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="340dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/editScheduleButton"
             app:layout_constraintEnd_toEndOf="parent"
