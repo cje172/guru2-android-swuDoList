@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:privateImeOptions="defaultInputmode=korean"
             android:fontFamily="@font/nanumsquareroundb"
             android:hint="카테고리 이름"
             android:singleLine="true" />
