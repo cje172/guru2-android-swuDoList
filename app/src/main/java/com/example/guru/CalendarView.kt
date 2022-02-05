@@ -162,6 +162,9 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun openColorPicker() {
         val colorPicker = ColorPicker(this)
         colorPicker.setTitle("변경할 색을 고르세요")
+        colorPicker.positiveButton.setTextColor(themeColor)
+        colorPicker.negativeButton.setTextColor(themeColor)
+
         val colors = ArrayList<String>()
 
         colors.add("#9E1A20")
@@ -169,6 +172,8 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
         colors.add("#FFB300")
         colors.add("#205723")
         colors.add("#000000")
+
+
 
         colorPicker.setColors(colors)
             .setColumns(5)

@@ -10,8 +10,7 @@ class CategoryDBHelper(
     name: String?,
     factory: SQLiteDatabase.CursorFactory?,
     version: Int
-)
-    : SQLiteOpenHelper(context, name, factory, version) {
+) : SQLiteOpenHelper(context, name, factory, version) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val sql = "CREATE TABLE category (name text)"
@@ -30,7 +29,7 @@ class CategoryDBHelper(
         writableDatabase.close()
     }
 
-    fun selectCategory() : ArrayList<String> {
+    fun selectCategory(): ArrayList<String> {
         val list = ArrayList<String>()
         val selectAll = "SELECT * FROM category"
         val cursor = readableDatabase.rawQuery(selectAll, null)
@@ -57,7 +56,6 @@ class CategoryDBHelper(
 
         val selectionArgs = arrayOf<String>(oldName)
         writableDatabase.update("category", values, "name = ?", selectionArgs)
-
         writableDatabase.close()
     }
 }

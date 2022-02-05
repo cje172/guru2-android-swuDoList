@@ -16,9 +16,6 @@ class EditCategory : CategoryListView() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_category)
 
-        // 뒤로가기 버튼
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         addButton = findViewById<Button>(R.id.addButton)
         categoryEditText = findViewById<EditText>(R.id.categoryEditText)
         categoryListView = findViewById(R.id.categoryListView)
@@ -47,7 +44,7 @@ class EditCategory : CategoryListView() {
                 adapter.list.clear()
                 adapter.list.addAll(categoryHelper.selectCategory())
 
-                // ListView 갱신
+                // 리스트뷰 갱신
                 adapter.notifyDataSetChanged()
                 Toast.makeText(applicationContext, "카테고리가 추가되었습니다", Toast.LENGTH_SHORT).show()
                 categoryEditText.setText("")

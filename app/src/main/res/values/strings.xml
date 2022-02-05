@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Guru</string>
     <string name="do_list">슈Do-List</string>
+
+    <string name="colorpicker_dialog_ok">변경</string>
+    <string name="colorpicker_dialog_cancel">취소</string>
 </resources>

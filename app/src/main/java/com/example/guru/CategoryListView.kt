@@ -17,9 +17,6 @@ open class CategoryListView : CalendarView() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_view)
 
-        // 뒤로가기 버튼
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         categoryTextView = findViewById(R.id.categoryTextView)
         categoryListView = findViewById(R.id.categoryListView)
         categoryButton = findViewById(R.id.categoryButton)

@@ -1,19 +1,16 @@
 package com.example.guru
 
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_edit_schedule.*
 
-class EditSchedule : AppCompatActivity() {
+class EditSchedule : CalendarView() {
     lateinit var add_todo_btn : ImageButton
     lateinit var add_todo_text : EditText
 
-    lateinit var helper : SQLiteHelper
+    lateinit var sqLiteHelper : SQLiteHelper
 
 
     lateinit var categoryHelper : CategoryDBHelper
@@ -27,11 +24,11 @@ class EditSchedule : AppCompatActivity() {
         add_todo_btn = findViewById(R.id.add_todo_btn)
         add_todo_text = findViewById(R.id.add_todo)
 
-        helper = SQLiteHelper(this, "TodoData", null, 1)
+        sqLiteHelper = SQLiteHelper(this, "TodoData", null, 1)
 
         val adapter = EditScheduleAdapter()
-        adapter.listData.addAll(helper.selectTodo())
-        adapter.helper = helper
+        adapter.listData.addAll(sqLiteHelper.selectTodo())
+        adapter.helper = sqLiteHelper
 
         recyclerTodo.adapter = adapter
         recyclerTodo.layoutManager = LinearLayoutManager(this)
@@ -60,10 +57,10 @@ class EditSchedule : AppCompatActivity() {
         add_todo_btn.setOnClickListener {
             if (add_todo_text.text.toString().isNotEmpty()) {
                 val todo = Data(selectedCategory, add_todo_text.text.toString())
-                helper.insertTodo(todo)
+                sqLiteHelper.insertTodo(todo)
             }
             adapter.listData.clear()
-            adapter.listData.addAll(helper.selectTodo())
+            adapter.listData.addAll(sqLiteHelper.selectTodo())
 
             adapter.notifyDataSetChanged()
             add_todo_text.setText("")

@@ -51,6 +51,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
+    implementation 'petrov.kristiyan:colorpicker-library:1.1.10'//ColorPicker 라이브러리
     implementation 'com.android.volley:volley:1.1.1'//서버통신 관련 라이브러리
 }
