@@ -9,7 +9,10 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_edit_schedule.*
+import java.io.BufferedWriter
 import java.io.File
+import java.io.FileWriter
+import java.io.PrintWriter
 import java.lang.Exception
 
 class EditSchedule : CalendarView() {
@@ -58,13 +61,6 @@ class EditSchedule : CalendarView() {
 
         }
 
-        // 접근하려는 폴더 경로
-        var myDirPath = File("/sdcard/schedule")
-        // 폴더가 없을 경우, 폴더 생성
-        if (myDirPath.exists().not()) {
-            myDirPath.mkdir()
-        }
-
         // 추가 버튼 눌렀을 때
         add_todo_btn.setOnClickListener {
             var year = intent.getIntExtra("year", 0).toString()
@@ -79,9 +75,10 @@ class EditSchedule : CalendarView() {
                 sqLiteHelper.insertTodo(todo)
 
                 try {
-                    var outFs = openFileOutput(fileName, Context.MODE_PRIVATE)
-                    outFs.write(("[" + selectedCategory + "] " + add_todo_text.text.toString()).toByteArray())
-                    outFs.close()
+                    var file = FileWriter("/data/data/com.example.guru/files/" + fileName, true)
+                    file.use {
+                        it.write(("[" + selectedCategory + "] " + add_todo_text.text.toString()) + "\n")
+                    }
                 } catch (e: Exception) {
                 }
             }

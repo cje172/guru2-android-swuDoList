@@ -1,5 +1,6 @@
 package com.example.guru
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
@@ -51,6 +52,7 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
     var selectedMonth by Delegates.notNull<Int>()
     var selectedDay by Delegates.notNull<Int>()
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 테마 변경 설정
@@ -97,20 +99,33 @@ open class CalendarView : AppCompatActivity(), NavigationView.OnNavigationItemSe
             selectedDay = day
 
             var fileName = selectedYear.toString() + "_" + selectedMonth + "_" + selectedDay + ".txt"
+            var layout = findViewById<LinearLayout>(R.id.linearLayout)
+            var textView = TextView(this)
+            var layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
 
             try {
+                layout.removeAllViews()
+
+                // 파일 읽어오기
                 var inFs = openFileInput(fileName)
                 val fileData = ByteArray(inFs.available())
                 inFs.read(fileData)
                 inFs.close()
 
                 var str = String(fileData)
-                var tv: TextView = findViewById(R.id.tv1)
-                tv.text = str
-                tv.visibility = View.VISIBLE
+
+                // 텍스트뷰 속성 설정
+                textView.layoutParams = layoutParams
+                textView.text = str
+                textView.id = 1
+
+                // 텍스트뷰 더하기
+                layout.addView(textView)
             } catch (e: Exception) {
-                var tv: TextView = findViewById(R.id.tv1)
-                tv.text = ""
+                layout.removeAllViews()
             }
         }
 
